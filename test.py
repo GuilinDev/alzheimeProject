@@ -37,8 +37,27 @@ print(df)
 # df.keys()
 # print(df)
 
-# # step4：将group BM-32中的第一个GPL96平台中cel灰度值导入python
-# from GSE84422 import (series, head_map_filter, row_iter)
+# # step4：unzip all the cel.gz under the directory
+
+# step 5 parse one .cel file
+from Bio.Affy import CelFile
+with open("GSE84422/GSM2233971_51294hg133a11.CEL", "r") as handle:
+    c = CelFile.read_v3(handle)
+
+c.version = 3
+print("%i by %i array" % c.intensities.shape)
+
+
+
+
+
+
+
+
+
+
+
+# from Pandas import (series, head_map_filter, row_iter)
 # from typing import (NamedTuple, Callable, List, Tuple, Iterable, Dict, Any)
 #
 # RawPairIter = Iterable[Tuple[float, float]]
