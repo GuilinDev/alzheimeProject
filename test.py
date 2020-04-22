@@ -10,6 +10,7 @@ import os
 
 # Get the current dir
 current_dir = os.path.dirname(__file__)
+print(current_dir)
 # Direct to input Source
 inputSourceFilesPath = os.path.join(current_dir, "inputSource")
 
@@ -36,25 +37,25 @@ print(df)
 # df.keys()
 # print(df)
 
-# step4：将group BM-32中的第一个GPL96平台中cel灰度值导入python
-from GSE84422 import (series, head_map_filter, row_iter)
-from typing import (NamedTuple, Callable, List, Tuple, Iterable, Dict, Any)
-
-RawPairIter = Iterable[Tuple[float, float]]
-
-class Pair(NamedTuple):
-    x: float
-    y: float
-
-pairs: Callable[[RawPairIter], List[Pair]] \
-    = lambda source: list(Pair(*row) for row in source)
-
-def raw_data() -> Dict[str, List[Pair]]:
-    with open("annotation96.csv") as source:
-        data = tuple(head_map_filter(row_iter(source)))
-        mapping = {
-            id_str: pairs(series(id_num, data))
-            for id_num, id_str in enumerate(
-                 ['I', 'II', 'III', 'IV'])
-        }
-    return mapping
+# # step4：将group BM-32中的第一个GPL96平台中cel灰度值导入python
+# from GSE84422 import (series, head_map_filter, row_iter)
+# from typing import (NamedTuple, Callable, List, Tuple, Iterable, Dict, Any)
+#
+# RawPairIter = Iterable[Tuple[float, float]]
+#
+# class Pair(NamedTuple):
+#     x: float
+#     y: float
+#
+# pairs: Callable[[RawPairIter], List[Pair]] \
+#     = lambda source: list(Pair(*row) for row in source)
+#
+# def raw_data() -> Dict[str, List[Pair]]:
+#     with open("annotation96.csv") as source:
+#         data = tuple(head_map_filter(row_iter(source)))
+#         mapping = {
+#             id_str: pairs(series(id_num, data))
+#             for id_num, id_str in enumerate(
+#                  ['I', 'II', 'III', 'IV'])
+#         }
+#     return mapping
