@@ -37,7 +37,18 @@ print(df)
 # df.keys()
 # print(df)
 
-# # step4：unzip all the cel.gz under the directory
+# step4：unzip all the cel.gz under the directory
+import zipfile
+
+os.chdir('D:\alzheimeProject\GSE84422')
+os.getcwd()
+retval = os.getcwd()
+print("%s" % retval)
+# OSError: [WinError 123] 文件名、目录名或卷标语法不正确。: 'D:\x07lzheimeProject\\GSE84422'
+# 此处我想把路径变成GSE84422的文件夹，然后下面解压在inputSource文件夹中，为什么此处显示文件名不正确？
+extracting = zipfile.ZipFile('.gz')
+extracting.extract('D:\alzheimeProject\inputSource')
+extracting.close()
 
 # step 5 parse one .cel file
 from Bio.Affy import CelFile
@@ -47,34 +58,7 @@ with open("GSE84422/GSM2233971_51294hg133a11.CEL", "r") as handle:
 c.version = 3
 print("%i by %i array" % c.intensities.shape)
 
-
-
-
-
-
-
-
-
-
-
-# from Pandas import (series, head_map_filter, row_iter)
-# from typing import (NamedTuple, Callable, List, Tuple, Iterable, Dict, Any)
-#
-# RawPairIter = Iterable[Tuple[float, float]]
-#
-# class Pair(NamedTuple):
-#     x: float
-#     y: float
-#
-# pairs: Callable[[RawPairIter], List[Pair]] \
-#     = lambda source: list(Pair(*row) for row in source)
-#
-# def raw_data() -> Dict[str, List[Pair]]:
-#     with open("annotation96.csv") as source:
-#         data = tuple(head_map_filter(row_iter(source)))
-#         mapping = {
-#             id_str: pairs(series(id_num, data))
-#             for id_num, id_str in enumerate(
-#                  ['I', 'II', 'III', 'IV'])
-#         }
-#     return mapping
+# step 6 install PyAffy
+pip install pyaffy
+# 显示douban.com untrust，装不上
+# 用github中setup的代码还是装不上，我想是不是还得经历一回儿powershell啊？
