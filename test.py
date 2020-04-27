@@ -41,15 +41,15 @@ inputSourceFilesPath = os.path.join(current_dir, "inputSource")
 import zipfile
 
 # 试试方法一：将path更改到需要解压的文件夹：
-# os.chdir('D:\alzheimeProject\GSE84422')
-# os.getcwd()
-# retval = os.getcwd()
-# print("%s" % retval)
-# # OSError: [WinError 123] 文件名、目录名或卷标语法不正确。: 'D:\x07lzheimeProject\\GSE84422'
-# # 此处我想把路径变成GSE84422的文件夹，然后下面解压在inputSource文件夹中，为什么此处显示文件名不正确？
-# extracting = zipfile.ZipFile('.gz')
-# extracting.extract('D:\alzheimeProject\inputSource')
-# extracting.close()
+os.chdir('D:\alzheimeProject\GSE84422')
+os.getcwd()
+retval = os.getcwd()
+print("%s" % retval)
+# OSError: [WinError 123] 文件名、目录名或卷标语法不正确。: 'D:\x07lzheimeProject\\GSE84422'
+# 此处我想把路径变成GSE84422的文件夹，然后下面解压在inputSource文件夹中，为什么此处显示文件名不正确？
+extracting = zipfile.ZipFile('.gz')
+extracting.extract('D:\alzheimeProject\inputSource')
+extracting.close()
 
 # 试试方法二：用open函数直接打开需要解压的文件夹
 os.open('D:\alzheimeProject\GSE84422', 'r')
@@ -58,6 +58,19 @@ extracting.extract('D:\alzheimeProject\inputSource')
 extracting.close()
 # TypeError: open() missing required argument 'flags' (pos 2)
 # 加入参数'r'时，TypeError: an integer is required (got type str)
+
+# 试试方法三：
+# gz： 即gzip，通常只能压缩一个文件。与tar结合起来就可以实现先打包，再压缩。这句笔记还不能理解意思，先放在这儿，慢慢体会。
+import gzip
+
+
+def un_gz(file_name):
+    "D:\alzheimeProject\GSE84422"
+    f_name = file_name.replace(".gz", "")
+    g_file = gzip.GzipFile(file_name)
+    open(f_name, "wb+").write(g_file.read("D:\alzheimeProject\inputSource"))
+    g_file.close()
+# 没反应？哪里错了？
 
 # # step 5 parse one .cel file
 # from Bio.Affy import CelFile
